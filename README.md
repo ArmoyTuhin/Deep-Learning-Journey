@@ -86,3 +86,34 @@ for x1, x2, actual_label in training_data:
         bias = bias + learning_rate * error
         
         print(f"New weights: {weights}, New bias: {bias}")
+
+
+### A Quick Walkthrough
+
+Let's trace the algorithm with our training data.
+
+#### Data Point 1: `[2, 3, 1]`
+
+1.  **Initial State**: `weights = [0.0, 0.0]`, `bias = 0.0`.
+2.  **Make a Prediction**:
+    * Weighted sum = `(0.0 * 2) + (0.0 * 3) + 0.0 = 0`.
+    * Since the sum is `>= 0`, the `predicted_label` is **1**.
+3.  **Check for Mistake**: The `actual_label` is 1. Our prediction was 1. **No mistake!** We do nothing.
+
+---
+
+#### Data Point 2: `[1, -1, 0]`
+
+1.  **State**: The weights and bias are unchanged: `weights = [0.0, 0.0]`, `bias = 0.0`.
+2.  **Make a Prediction**:
+    * Weighted sum = `(0.0 * 1) + (0.0 * -1) + 0.0 = 0`.
+    * Since the sum is `>= 0`, the `predicted_label` is **1**.
+3.  **Check for Mistake**: The `actual_label` is 0. **We made a mistake!**
+4.  **Apply the Trick!**
+    * `error = actual_label - predicted_label` which is `0 - 1 = -1`.
+    * `new_weight_1 = 0.0 + 0.1 * (-1) * 1 = -0.1`.
+    * `new_weight_2 = 0.0 + 0.1 * (-1) * (-1) = 0.1`.
+    * `new_bias = 0.0 + 0.1 * (-1) = -0.1`.
+5.  **New State**: The weights and bias are updated to `weights = [-0.1, 0.1]`, `bias = -0.1`.
+
+The algorithm keeps repeating this process for all data points, over and over, slowly getting better until it stops making mistakes. That's it! You've just taught a machine how to learn.
