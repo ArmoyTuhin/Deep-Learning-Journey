@@ -87,6 +87,7 @@ for x1, x2, actual_label in training_data:
         
         print(f"New weights: {weights}, New bias: {bias}")
 
+```
 
 ### A Quick Walkthrough
 
